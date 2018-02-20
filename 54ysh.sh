@@ -25,8 +25,8 @@ cat <<EOT
 speaking tool for mac.  ver.0.0.1
 
 Type here
-> 
 EOT
+echo -n "> "
 
 read userInput
 echo -n "> "
