@@ -25,5 +25,19 @@ cat <<EOT
 speaking tool for mac.  ver.0.0.1
 
 Type here
->
+> 
 EOT
+
+read userInput
+echo -n "> "
+
+while [ "$userInput" != ":q" ]
+do
+  say $userInput
+  
+  read userInput
+  echo -n "> "
+done
+
+echo "finished correctly"
+return 0
