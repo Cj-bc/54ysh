@@ -8,6 +8,17 @@
 # http://opensource.org/license/mit-license.php
 
 
+if [ -p /dev/stdin ]
+then
+  if [ "$(echo $(cat -) | nkf -g)" = "ASCII" ]
+  then
+    say -v alex $userInput
+  else
+    say -v kyoko $userInput
+  fi
+  exit 0
+fi
+
 # Logo and info
 cat <<EOT
 
