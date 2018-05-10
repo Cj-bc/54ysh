@@ -33,7 +33,12 @@ echo -n "> "
 
 while [ "$userInput" != ":q" ]
 do
-  say $userInput
+  if [ "$(echo $userInput | nkf -g)" = "ASCII" ]
+  then
+    say -v alex $userInput
+  else
+    say -v kyoko $userInput
+  fi
   
   read userInput
   echo -n "> "
