@@ -11,15 +11,15 @@
 if [ -p /dev/stdin ]
 then
   userInput=$(cat -)
-  if [ "echo $userInput | nkf -g)" = "ASCII" ]
+  if [ "echo "$userInput" | nkf -g)" = "ASCII" ]
   then
-    say -v alex $userInput &
+    say -v alex "$userInput" &
   else
-    say -v kyoko $userInput &
+    say -v kyoko "$userInput" &
   fi
   if [ -p /dev/stdout ]
   then
-    echo $userInput
+    echo "$userInput"
   fi
   exit 0
 fi
