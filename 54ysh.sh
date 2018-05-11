@@ -10,13 +10,16 @@
 
 if [ -p /dev/stdin ]
 then
-  userInput=$(cat -)
-  if [ "$(echo "$userInput" | nkf -g)" = "ASCII" ]
-  then
-    say -v alex "$userInput" &
-  else
-    say -v kyoko "$userInput" &
-  fi
+  while read userInput
+  do
+#    userInput=$(cat -)
+    if [ "$(echo "$userInput" | nkf -g)" = "ASCII" ]
+    then
+      say -v alex "$userInput"
+    else
+      say -v kyoko "$userInput"
+    fi
+  done
   if [ -p /dev/stdout ]
   then
     echo "$userInput"
