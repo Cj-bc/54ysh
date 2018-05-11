@@ -10,20 +10,24 @@
 
 if [ -p /dev/stdin ]
 then
+  temp=$(mktemp /tmp/54ysh.stdin.tmp.XXXXXX)
+  cat - > $temp
   while read userInput
   do
-#    userInput=$(cat -)
     if [ "$(echo "$userInput" | nkf -g)" = "ASCII" ]
     then
       say -v alex "$userInput"
     else
       say -v kyoko "$userInput"
     fi
-  done
+    input=("${input[@]}" "$userInput")
+  done < $temp
   if [ -p /dev/stdout ]
   then
-    echo "$userInput"
+    cat $temp
   fi
+
+  rm $temp
   exit 0
 fi
 
