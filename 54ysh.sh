@@ -12,7 +12,12 @@ if [ -p /dev/stdin ]
 then
   temp=$(mktemp /tmp/54ysh.stdin.tmp.XXXXXX)
   cat - > $temp
-  while read userInput
+  # push stdin to stdout
+ if [ -p /dev/stdout ]
+ then
+  cat $temp
+ fi
+ while read userInput
   do
     if [ "$(echo "$userInput" | nkf -g)" = "ASCII" ]
     then
@@ -22,10 +27,6 @@ then
     fi
     input=("${input[@]}" "$userInput")
   done < $temp
-  if [ -p /dev/stdout ]
-  then
-    cat $temp
-  fi
 
   rm $temp
   exit 0
