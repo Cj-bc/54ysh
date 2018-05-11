@@ -1,13 +1,5 @@
 #!/bin/bash
 
-function getinput() {
-  if [ -p /dev/stdin ]; then
-      cat -
-  else
-      echo $@
-  fi
-}
-
 function usage_exit() {
         echo "Usage: $0 [-v agent]" 1>&2
         exit 1
@@ -38,9 +30,9 @@ else
 fi
 
 if [ $language = "en" ]; then
-  getinput $@ | espeak
+  echo "$@" | espeak
 else
-  getinput $@ |  open_jtalk \
+  echo "$@" | open_jtalk \
   -m /usr/share/hts-voice/nitech-jp-atr503-m001/nitech_jp_atr503_m001.htsvoice \
   -x /var/lib/mecab/dic/open-jtalk/naist-jdic \
   -ow /tmp/say.wav
