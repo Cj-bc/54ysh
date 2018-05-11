@@ -26,12 +26,12 @@ if [ -v VALUE_V ];then
     language=en
   fi
 else
-  language=en
+  language=$(sed -e 's/^\(..\)_.*$/\1/g' <<< $LANG)
 fi
 
 if [ $language = "en" ]; then
   echo "$@" | espeak
-else
+elif [ $language = "ja"]; then
   tmpfile=$(mktemp)
   echo "$@" | open_jtalk \
   -m /usr/share/hts-voice/nitech-jp-atr503-m001/nitech_jp_atr503_m001.htsvoice \
@@ -39,4 +39,6 @@ else
   -ow $tmpfile
   play -q $tmpfile
   rm $tmpfile
+else
+  echo "Language '$language' isn't supported"
 fi
