@@ -31,12 +31,12 @@ fi
 
 tmpfile=$(mktemp)
 if [ $language = "en" ]; then
-  echo "$@" | espeak -w $tmpfile
-elif [ $language = "ja"]; then
-  echo "$@" | open_jtalk \
-  -m /usr/share/hts-voice/nitech-jp-atr503-m001/nitech_jp_atr503_m001.htsvoice \
-  -x /var/lib/mecab/dic/open-jtalk/naist-jdic \
-  -ow $tmpfile
+  espeak -w $tmpfile $@
+elif [ $language = "ja" ]; then
+  open_jtalk \
+    -m /usr/share/hts-voice/nitech-jp-atr503-m001/nitech_jp_atr503_m001.htsvoice \
+    -x /var/lib/mecab/dic/open-jtalk/naist-jdic \
+    -ow $tmpfile <<< $@
 else
   echo "Language '$language' isn't supported"
   rm $tmpfile
