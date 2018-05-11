@@ -11,7 +11,7 @@
 if [ -p /dev/stdin ]
 then
   userInput=$(cat -)
-  if [ "echo "$userInput" | nkf -g)" = "ASCII" ]
+  if [ "$(echo "$userInput" | nkf -g)" = "ASCII" ]
   then
     say -v alex "$userInput" &
   else
