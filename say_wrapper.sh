@@ -32,9 +32,11 @@ fi
 if [ $language = "en" ]; then
   echo "$@" | espeak
 else
+  tmpfile=$(mktemp)
   echo "$@" | open_jtalk \
   -m /usr/share/hts-voice/nitech-jp-atr503-m001/nitech_jp_atr503_m001.htsvoice \
   -x /var/lib/mecab/dic/open-jtalk/naist-jdic \
-  -ow /tmp/say.wav
-  play -q /tmp/say.wav
+  -ow $tmpfile
+  play -q $tmpfile
+  rm $tmpfile
 fi
